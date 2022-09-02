@@ -1,0 +1,5 @@
+Creating a Java servlet - https://beginnersbook.com/2017/07/how-to-create-and-run-servlet-in-eclipse-ide/
+
+Installing an Apache Tomcat server - https://beginnersbook.com/2017/06/how-to-configure-apache-tomcat-server-in-eclipse-ide/
+
+Hooking our web page up to an SQL database - https://www.knowprogram.com/servlet/servlet-to-mysql-in-eclipse/

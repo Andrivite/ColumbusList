@@ -1,0 +1,51 @@
+package columbusListCheckout;
+
+import java.io.IOException;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import columbusListProfilePage.ProfilePageConnector;
+
+/**
+ * Servlet implementation class CheckoutServlet
+ * TODO: Safe transaction function. 
+ */
+@WebServlet("/CheckoutPageServlet")
+public class CheckoutPageServlet extends HttpServlet 
+{
+	private static final long serialVersionUID = 1L;
+       
+    public CheckoutPageServlet() 
+    {
+        super();
+    }
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
+	{
+		HttpSession session = request.getSession(false);
+		if (session == null || session.getAttribute("email") == null) 
+        {
+            response.sendRedirect(request.getContextPath() + "/LoginServlet");
+        } 
+		else
+		{
+			request.getRequestDispatcher("/WEB-INF/checkoutPage.jsp").forward(request, response);
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	{
+		int listingId = Integer.parseInt(request.getParameter("someStuff"));
+		request.setAttribute("listingid", null);
+		try {
+			ProfilePageConnector.deleteListing(listingId);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		request.getRequestDispatcher("/HomePageServlet").forward(request, response);
+	}
+}
